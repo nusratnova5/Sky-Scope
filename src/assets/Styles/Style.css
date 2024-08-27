@@ -18,6 +18,6 @@ body {
 }
 
 .progress::-webkit-progress-value {
-  background-color: #803D3B; /* Custom color for progress value */
+  background-color: #E76F51   ; /* Custom color for progress value */
 }
 

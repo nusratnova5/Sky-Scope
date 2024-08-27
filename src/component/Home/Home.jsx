@@ -7,6 +7,7 @@ import SideBar from '../shared/SideBar';
 import CalendarModal from './Modal/Modal';
 import AirQualityBarChart from './AirQualityBarChart/AirQualityBarChart';
 import TempPieChart from './TempPieChart/TempPieChart';
+import WindSpeedChart from './WindSpeedChart/WindSpeedChart';
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(null);
@@ -21,11 +22,11 @@ const Home = () => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
         const day = String(date.getDate()).padStart(2, '0');
-        
+
         const formattedDate = `${year}-${month}-${day}`;
         setQueryDate(formattedDate)
     }
-    
+
     useEffect(() => {
         // Define the API endpoint and your API key
         const apiKey = '0ff7721ed6344f74a37173445242508';
@@ -47,30 +48,36 @@ const Home = () => {
 
     return (
         <div className='h-screen overflow-hidden flex flex-col bg-primary'>
-        <div className='flex flex-1 overflow-hidden'>
-            <div >
-                <SideBar weatherData={weatherData} />
+            <div className='flex flex-1 overflow-hidden'>
+                <div >
+                    <SideBar weatherData={weatherData} />
+                </div>
+                <div className='p-10 flex-1 overflow-y-scroll h-full' >
+                    <div className=''>
+                        {weatherData &&
+                            <TopSection
+                                selectedDate={selectedDate}
+                                weatherData={weatherData}
+                                city={city}
+                                onSearch={handleSearch}
+                                setSelectedDate={handleChangeDate}
+                            />
+                        }
+                        {weatherData && <Overview selectedDate={selectedDate} weatherData={weatherData} />}
+                        <div className='flex gap-10'>
+                            <div className='my-10 flex-1'>
+                                {weatherData && <AirQualityBarChart weatherData={weatherData} />}
+                            </div>
+                            <div className='flex-1'>
+                                {weatherData && <WindSpeedChart weatherData={weatherData} />}
+
+                            </div>
+                        </div>
+                        {/* <CalendarModal setSelectedDate={handleChangeDate} /> */}
+                    </div>
+                </div>
             </div>
-            <div className='p-10 flex-1 overflow-y-scroll h-full' >     
-                   <div className=''>
-            {weatherData && 
-                <TopSection 
-                    selectedDate={selectedDate} 
-                    weatherData={weatherData} 
-                    city={city} 
-                    onSearch={handleSearch}
-                    setSelectedDate={handleChangeDate} 
-                />
-            }
-            {weatherData && <Overview selectedDate={selectedDate} weatherData={weatherData} />}
-            <div className='my-10'>
-            {weatherData && <AirQualityBarChart  weatherData={weatherData} />}
-            </div>
-            {/* <CalendarModal setSelectedDate={handleChangeDate} /> */}
         </div>
-            </div>
-        </div>
-    </div>
 
     );
 };

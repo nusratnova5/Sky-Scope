@@ -10,9 +10,7 @@ import { WiBarometer, WiCloudyGusts, WiHumidity } from 'react-icons/wi';
 import TempPieChart from '../TempPieChart/TempPieChart';
 const COLORS = ['#FF6F61', '#FF8C00', '#FFD700', '#ADFF2F', '#00FF00'];
 
-const Overview = ({ weatherData }) => {
-    console.log(weatherData);
-
+const Overview = ({ weatherData }) => {    
     const info = [
         {
             icon: <FiWind />,
@@ -56,7 +54,7 @@ const Overview = ({ weatherData }) => {
         },
     ]
     return (
-        <div className='grid lg:grid-cols-6 justify-center items-center'>
+        <div className='grid lg:grid-cols-6 justify-center items-start gap-10'>
             <div className='col-span-4'>
                 <p className='text-xl font-bold mb-2'>Today Overview</p>
                 <div className='grid lg:grid-cols-4 gap-3'>
@@ -73,7 +71,8 @@ const Overview = ({ weatherData }) => {
                     })}
                 </div>
             </div>
-            <div className='col-span-2'>
+            <div className='col-span-2 '>
+                <p className='text-xl font-bold mb-2'>Latest 5 Hours Tempareture</p>
                 {weatherData && <TempPieChart weatherData={weatherData} />}
 
             </div>

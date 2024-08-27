@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import CalendarView from '../Calendar/CalendarView';
+import { RiCalendar2Fill } from 'react-icons/ri';
 
 const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate }) => {
     const [monthYear, setMonthYear] = useState('');
@@ -41,7 +42,7 @@ const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate 
                     <p className='text-3xl font-bold text-dark'>{monthYear}</p>
                     <div className='flex items-center justify-between'>
                         <p className='text-sm'>{fullDate}</p>
-                        <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right"  data-tip="select a date" onClick={openModal}>                        <IoIosArrowDown /></button>
+                        <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right"  data-tip="select a date" onClick={openModal}><RiCalendar2Fill  /></button>
                         {isModalOpen && (
                             <dialog className="modal" open>
                                 <div className="modal-box">
