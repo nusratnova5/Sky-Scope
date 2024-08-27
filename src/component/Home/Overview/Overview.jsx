@@ -1,47 +1,82 @@
 import React, { useEffect } from 'react';
+import { FiWind } from 'react-icons/fi';
 import { GiWhirlwind } from 'react-icons/gi';
+import { HiOutlineCloud } from 'react-icons/hi';
+import { LiaCloudRainSolid } from 'react-icons/lia';
+import { LuSunDim } from 'react-icons/lu';
+import { PiCloudSnowLight } from 'react-icons/pi';
+import { TbTemperatureSun } from 'react-icons/tb';
+import { WiBarometer, WiCloudyGusts, WiHumidity } from 'react-icons/wi';
+import TempPieChart from '../TempPieChart/TempPieChart';
+const COLORS = ['#FF6F61', '#FF8C00', '#FFD700', '#ADFF2F', '#00FF00'];
 
 const Overview = ({ weatherData }) => {
     console.log(weatherData);
-    
+
     const info = [
         {
-            icon: <GiWhirlwind />,
+            icon: <FiWind />,
             title: "Wind Speed",
-            speed: `${weatherData?.current?.wind_kph}`
+            status: `${weatherData?.current?.wind_kph}  Km/h`
         },
         {
-            icon: <GiWhirlwind />,
-            title: "Phone",
-            speed: `${weatherData?.current?.wind_kph}`
+            icon: <WiBarometer />,
+            title: "Pressure",
+            status: `${weatherData?.current?.pressure_mb} mb`
         },
         {
-            icon: <GiWhirlwind />,
-            title: "Phone",
-            speed: `${weatherData?.current?.wind_kph}`
+            icon: <WiHumidity />,
+            title: "Humidity",
+            status: `${weatherData?.current?.humidity}%`
         },
         {
-            icon: <GiWhirlwind />,
-            title: "Phone",
-            speed: `${weatherData?.current?.wind_kph}`
+            icon: <HiOutlineCloud />,
+            title: "Cloud",
+            status: `${weatherData?.current?.cloud}%`
+        },
+        {
+            icon: <LiaCloudRainSolid />,
+            title: "Change of Rain",
+            status: `${weatherData?.forecast?.forecastday[0]?.day?.daily_chance_of_rain}%`
+        },
+        {
+            icon: <WiCloudyGusts />,
+            title: "Gust",
+            status: `${weatherData?.current?.gust_kph} Km/h`
+        },
+        {
+            icon: <TbTemperatureSun />,
+            title: "Feelslike",
+            status: `${weatherData?.current?.feelslike_c}°C`
+        },
+        {
+            icon: <LuSunDim />,
+            title: "UV Index",
+            status: `${weatherData?.current?.uv}`
         },
     ]
     return (
-        <div className=''>
-            <p>Today Overview</p>
+        <div className='grid lg:grid-cols-6 justify-center items-center'>
+            <div className='col-span-4'>
+                <p className='text-xl font-bold mb-2'>Today Overview</p>
                 <div className='grid lg:grid-cols-4 gap-3'>
-                {info?.map((item) => {
-                    return <div className='flex items-center border'>
-                        <div className=''>
-                            <div className='text-[28px]'>{item.icon}</div>
+                    {info?.map((item) => {
+                        return <div className='flex items-center gap-3 bg-gray p-2'>
+                            <div className=''>
+                                <div className='text-[28px]'>{item.icon}</div>
+                            </div>
+                            <div className='flex-1'>
+                                <p className=''>{item.title}</p>
+                                <h3 className='text-xl'>{item.status}</h3>
+                            </div>
                         </div>
-                        <div className='flex-1'>
-                            <p className=''>{item.title}</p>
-                            <h3 className='text-xl'>{item.speed} Km/h</h3>
-                        </div>
-                    </div>
-                })}
+                    })}
                 </div>
+            </div>
+            <div className='col-span-2'>
+                {weatherData && <TempPieChart weatherData={weatherData} />}
+
+            </div>
         </div>
     );
 };

@@ -7,11 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        Primary: '#FFFFFF',  
-        accent: '#192837', 
-         gray: '#F1F4F1',  
+        primary: '#F4E6E4',   // Beige
+        accent: '#AF8260',    // Warm brown
+        secondary: '#803D3B', // Deep red-brown
+        dark: '#322C2B',      // Dark brown
+        gray: '#F1F4F1',      // Light gray
       },
-      
     },
   },
   plugins: [require('daisyui'),],

@@ -38,7 +38,7 @@ const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate 
         <div>
             <div className="flex justify-between mb-8">
                 <div>
-                    <p className='text-3xl font-bold'>{monthYear}</p>
+                    <p className='text-3xl font-bold text-dark'>{monthYear}</p>
                     <div className='flex items-center justify-between'>
                         <p className='text-sm'>{fullDate}</p>
                         <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right"  data-tip="select a date" onClick={openModal}>                        <IoIosArrowDown /></button>
@@ -74,7 +74,7 @@ const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate 
                             </div>
                         </div>
                         <div className="indicator">
-                            <button className="btn join-item" onClick={handleSearch}>
+                            <button className="btn join-item text-white bg-secondary" onClick={handleSearch}>
                                 Search
                             </button>
                         </div>

@@ -16,7 +16,7 @@ const SideBar = ({ isOpenSidebar, toggleSidebar, city, onSearch, weatherData }) 
                 <label onClick={toggleSidebar} aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-accent text-white">
                     <div className='w-full'>
-                        <h1 className='text-center text-4xl mb-10'>SkyScope</h1>
+                        <h1 className='text-center text-secondary font-bold text-4xl mb-10'>SkyScope</h1>
                     </div>
                     <li className='w-full'>
                         <div className="flex-1 gap-5 justify-between items-center">

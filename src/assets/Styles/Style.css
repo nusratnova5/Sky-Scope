@@ -11,3 +11,13 @@
 body {
   font-family: "Work Sans", sans-serif;
 }
+
+
+.progress::-webkit-progress-bar {
+  background-color: #e0e0e0; /* Background color of the progress bar */
+}
+
+.progress::-webkit-progress-value {
+  background-color: #803D3B; /* Custom color for progress value */
+}
+

@@ -5,6 +5,8 @@ import TopSection from './TopSection/TopSection';
 import CalendarView from './Calendar/CalendarView';
 import SideBar from '../shared/SideBar';
 import CalendarModal from './Modal/Modal';
+import AirQualityBarChart from './AirQualityBarChart/AirQualityBarChart';
+import TempPieChart from './TempPieChart/TempPieChart';
 
 const Home = () => {
     const [weatherData, setWeatherData] = useState(null);
@@ -27,7 +29,7 @@ const Home = () => {
     useEffect(() => {
         // Define the API endpoint and your API key
         const apiKey = '0ff7721ed6344f74a37173445242508';
-        const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&dt=${queryDate}&days=1&hour_fields=daily_chance_of_rain`;
+        const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&dt=${queryDate}&days=1&hour_fields=daily_chance_of_rain&aqi=yes`;
 
         // Fetch the data using Axios
         axios.get(apiUrl)
@@ -44,12 +46,12 @@ const Home = () => {
     };
 
     return (
-        <div className='h-screen overflow-hidden flex flex-col'>
+        <div className='h-screen overflow-hidden flex flex-col bg-primary'>
         <div className='flex flex-1 overflow-hidden'>
             <div >
                 <SideBar weatherData={weatherData} />
             </div>
-            <div className='p-10 flex-1 overflow-y-scroll h-full pt-20' >     
+            <div className='p-10 flex-1 overflow-y-scroll h-full' >     
                    <div className=''>
             {weatherData && 
                 <TopSection 
@@ -61,6 +63,9 @@ const Home = () => {
                 />
             }
             {weatherData && <Overview selectedDate={selectedDate} weatherData={weatherData} />}
+            <div className='my-10'>
+            {weatherData && <AirQualityBarChart  weatherData={weatherData} />}
+            </div>
             {/* <CalendarModal setSelectedDate={handleChangeDate} /> */}
         </div>
             </div>
