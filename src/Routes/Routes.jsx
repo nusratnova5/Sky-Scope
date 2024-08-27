@@ -5,12 +5,7 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <DashboardLayout/>,
-        children: [
-            {
-                path: "/",
-                element: <Home />
-            }
-        ]
+        element: <Home />
+
     },
 ]);

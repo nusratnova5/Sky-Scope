@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { GiWhirlwind } from 'react-icons/gi';
 
 const Overview = ({ weatherData }) => {
+    console.log(weatherData);
+    
     const info = [
         {
             icon: <GiWhirlwind />,

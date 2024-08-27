@@ -1,30 +1,84 @@
 import React, { useEffect, useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
+import CalendarView from '../Calendar/CalendarView';
 
-const TopSection = ({weatherData}) => {
-    
+const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate }) => {
     const [monthYear, setMonthYear] = useState('');
     const [fullDate, setFullDate] = useState('');
+    const [searchCity, setSearchCity] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
+
     useEffect(() => {
-        const now = new Date();
+        if (selectedDate) {
+            const date = selectedDate;
 
-        // Format "August 2024"
-        const optionsMonthYear = { month: 'long', year: 'numeric' };
-        setMonthYear(now.toLocaleDateString('en-US', optionsMonthYear));
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-        // Format "Monday, Aug 26 2024"
-        const optionsFullDate = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-        setFullDate(now.toLocaleDateString('en-US', optionsFullDate));
-    }, []);
+            const dayName = dayNames[date.getDay()];
+            const month = date.getMonth();
+            const day = date.getDate();
+            const year = date.getFullYear();
+
+            setMonthYear(`${monthNames[month]} ${year}`);
+            setFullDate(`${dayName}, ${shortMonthNames[month]} ${day} ${year}`);
+        }
+    }, [selectedDate]);
+
+    const handleSearch = () => {
+        onSearch(searchCity); // Trigger search in Home component
+    };
+
     return (
         <div>
-            <div className="flex gap-2">
-                <div className="">
-                    <p className=''>{monthYear}</p>
-                    <p>{fullDate}</p>
+            <div className="flex justify-between mb-8">
+                <div>
+                    <p className='text-3xl font-bold'>{monthYear}</p>
+                    <div className='flex items-center justify-between'>
+                        <p className='text-sm'>{fullDate}</p>
+                        <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right"  data-tip="select a date" onClick={openModal}>                        <IoIosArrowDown /></button>
+                        {isModalOpen && (
+                            <dialog className="modal" open>
+                                <div className="modal-box">
+                                    <CalendarView setSelectedDate={setSelectedDate} />
+                                </div>
+                                <form method="dialog" className="modal-backdrop" onClick={closeModal}>
+                                    <button>close</button>
+                                </form>
+                            </dialog>
+                        )}
+                    </div>
                 </div>
 
                 <div className="dropdown dropdown-end">
-                    <input type="text" value={weatherData?.location?.name} className='border' />
+                    {/* <input 
+                        type="text" 
+                        value={weatherData?.location?.name || city} 
+                        className='border' 
+                        readOnly 
+                    /> */}
+                    <div className="join">
+                        <div>
+                            <div>
+                                <input
+                                    className="input input-bordered join-item"
+                                    placeholder="Enter a country"
+                                    value={searchCity}
+                                    onChange={(e) => setSearchCity(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="indicator">
+                            <button className="btn join-item" onClick={handleSearch}>
+                                Search
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
