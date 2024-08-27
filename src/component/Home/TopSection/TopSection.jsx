@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import CalendarView from '../Calendar/CalendarView';
 import { RiCalendar2Fill } from 'react-icons/ri';
+import { TbLayoutSidebarFilled } from 'react-icons/tb';
 
-const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate }) => {
+const TopSection = ({ weatherData, selectedDate, city, onSearch, setSelectedDate, toggleSidebar }) => {
     const [monthYear, setMonthYear] = useState('');
     const [fullDate, setFullDate] = useState('');
     const [searchCity, setSearchCity] = useState('');
@@ -37,12 +38,18 @@ const TopSection = ({ weatherData, selectedDate, city, onSearch,setSelectedDate 
 
     return (
         <div>
-            <div className="flex justify-between mb-8">
+            <div className="flex flex-col lg:flex-row justify-between mb-8">
                 <div>
-                    <p className='text-3xl font-bold text-dark'>{monthYear}</p>
+                    <div className='flex items-center justify-between'>
+                        <p className='text-3xl font-bold text-dark'>{monthYear}</p>
+
+                        <label onClick={toggleSidebar} className="btn text-4xl bg-transparent border-0 shadow-transparent drawer-button lg:hidden">
+                            <TbLayoutSidebarFilled />
+                        </label>
+                    </div>
                     <div className='flex items-center justify-between'>
                         <p className='text-sm'>{fullDate}</p>
-                        <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right"  data-tip="select a date" onClick={openModal}><RiCalendar2Fill  /></button>
+                        <button className="btn bg-transparent border-none shadow-none hover:bg-transparent tooltip tooltip-right" data-tip="select a date" onClick={openModal}><RiCalendar2Fill /></button>
                         {isModalOpen && (
                             <dialog className="modal" open>
                                 <div className="modal-box">

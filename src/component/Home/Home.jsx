@@ -8,8 +8,13 @@ import CalendarModal from './Modal/Modal';
 import AirQualityBarChart from './AirQualityBarChart/AirQualityBarChart';
 import TempPieChart from './TempPieChart/TempPieChart';
 import WindSpeedChart from './WindSpeedChart/WindSpeedChart';
+import Note from './Note/Note';
 
 const Home = () => {
+    const [isOpenSidebar, setIsOpenIsdebar] = useState(false);
+    const toggleSidebar = () => {
+        setIsOpenIsdebar(!isOpenSidebar);
+    }
     const [weatherData, setWeatherData] = useState(null);
     const [city, setCity] = useState('Dhaka');
     const [error, setError] = useState(null);
@@ -50,12 +55,13 @@ const Home = () => {
         <div className='h-screen overflow-hidden flex flex-col bg-primary'>
             <div className='flex flex-1 overflow-hidden'>
                 <div >
-                    <SideBar weatherData={weatherData} />
+                    <SideBar toggleSidebar={toggleSidebar} isOpenSidebar={isOpenSidebar} weatherData={weatherData} />
                 </div>
                 <div className='p-10 flex-1 overflow-y-scroll h-full' >
                     <div className=''>
                         {weatherData &&
                             <TopSection
+                            toggleSidebar={toggleSidebar} isOpenSidebar={isOpenSidebar}
                                 selectedDate={selectedDate}
                                 weatherData={weatherData}
                                 city={city}
@@ -64,7 +70,7 @@ const Home = () => {
                             />
                         }
                         {weatherData && <Overview selectedDate={selectedDate} weatherData={weatherData} />}
-                        <div className='flex gap-10'>
+                        <div className='flex flex-col lg:flex-row gap-10'>
                             <div className='my-10 flex-1'>
                                 {weatherData && <AirQualityBarChart weatherData={weatherData} />}
                             </div>
@@ -77,6 +83,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <Note/>
         </div>
 
     );

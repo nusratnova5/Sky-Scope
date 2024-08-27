@@ -54,12 +54,12 @@ const Overview = ({ weatherData }) => {
         },
     ]
     return (
-        <div className='grid lg:grid-cols-6 justify-center items-start gap-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-6 justify-center items-start gap-10'>
             <div className='col-span-4'>
                 <p className='text-xl font-bold mb-2'>Today Overview</p>
-                <div className='grid lg:grid-cols-4 gap-3'>
+                <div className='lg:grid lg:grid-cols-4 gap-3 block'>
                     {info?.map((item) => {
-                        return <div className='flex items-center gap-3 bg-gray p-2'>
+                        return <div className='flex items-center gap-3 bg-gray p-2 mb-3 lg:mb-0'>
                             <div className=''>
                                 <div className='text-[28px]'>{item.icon}</div>
                             </div>
@@ -71,8 +71,8 @@ const Overview = ({ weatherData }) => {
                     })}
                 </div>
             </div>
-            <div className='col-span-2 '>
-                <p className='text-xl font-bold mb-2'>Latest 5 Hours Tempareture</p>
+            <div className='col-span-4 lg:col-span-2'>
+                <p className='text-xl font-bold lg:mb-2 mt-10 lg:mt-0'>Latest 5 Hours Tempareture</p>
                 {weatherData && <TempPieChart weatherData={weatherData} />}
 
             </div>

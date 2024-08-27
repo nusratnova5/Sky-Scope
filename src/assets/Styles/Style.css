@@ -20,4 +20,8 @@ body {
 .progress::-webkit-progress-value {
   background-color: #E76F51   ; /* Custom color for progress value */
 }
+.glassy-bg {
+  background: rgba(128, 61, 59, 0.3); /* Semi-transparent AF8260 color */
+  backdrop-filter: blur(3px); /* Blurring effect */
+}
 
